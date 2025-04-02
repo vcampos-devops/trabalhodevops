@@ -54,13 +54,16 @@ jobs:
 
 
   discord:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run Discord Webhook
-        uses: johnnyhuy/actions-discord-git-webhook@main
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+  runs-on: ubuntu-latest
+  steps:
+  - uses: actions/checkout@v4
+  - name: Discord Commits
+    uses: Sniddl/discord-commits@v1.6
+    with:
+      webhook: ${{ secrets.DISCORD_WEBHOOK }}
+      template: "avatar-with-link"
+      include-extras: true
 
+   
 
 
