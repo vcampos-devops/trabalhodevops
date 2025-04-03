@@ -1,35 +1,51 @@
-from src.main import *
 import unittest.mock
 
+from src.main import *
+
+
+@pytest.mark.asyncio
 def test_root():
-    assert root() == {"message": "Hello World"}
+    result = root()
+    yield result
+    assert result == {"message": "Hello World"}
 
     def test_funcaoteste(num_aleatorio=None):
         with unittest.mock.patch('random.randint', return_value=12345):
             result = funcaoteste()
+            yield result
 
-            assert result =={"teste: True, "num_aleatorio": 12345"}
+        assert result =={"teste: True, "num_aleatorio": 12345"}
 
 
 def test_create_estudante():
     estudante_test = Estudante(name="Fulano., curso="Curso 1", ativo=False)
-    assert estudante_teste == create_estudante()
+    result = create_estudante(estudante_teste)
+    yield result
+    assert estudante_teste == result
 
 
 def test_update_estudante_negativo():
-        assert not update_estudante(-5)
+        result = update_estudante(-5)
+        yield result
+        assert not result
 
 
 def test_update_estudante_positivo():
-        assert update_estudante(10)
-
+        result = update_estudante(10)
+        yield result
+        assert result
 
 def test_delete_estudante_negativo():
-    assert not delete_estudante(-5)
+    result = delete_estudante(-5)
+    yield result
+    assert not result
 
 
 def test_delete_estudante_positivo():
-        assert delete_estudante(5)
+    result = delete_estudante(5)
+    yield result
+    assert result
+
         
 
         
