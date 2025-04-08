@@ -5,6 +5,9 @@ from pydantic import BaseModel
 app = FastAPI()
 
 
+RANDOM_NUMBER_LIMIT = 57000
+
+
 class Estudante(BaseModel):
     name: str
     curso: str
@@ -18,7 +21,7 @@ async def root():
 
 @app.get("/funcaoteste")
 async def funcaoteste():
-    return {"teste": True, "num_aleatorio": random.randint( a: 0, b: 57000)}
+    return {"teste": True, "num_aleatorio": random.randint(0, 57000)}
 
 
 @app.post("/estudantes/cadastro")
@@ -29,4 +32,3 @@ async def create_estudante(estudante: Estudante):
 @app.put("/estudante/update/{id_estudante}")
 async def update_estudante(id_estudante: int):
     return id_estudante > 0
-
