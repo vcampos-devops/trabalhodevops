@@ -5,9 +5,6 @@ from pydantic import BaseModel
 app = FastAPI()
 
 
-RANDOM_NUMBER_LIMIT = 57000
-
-
 class Estudante(BaseModel):
     name: str
     curso: str
@@ -31,4 +28,9 @@ async def create_estudante(estudante: Estudante):
 
 @app.put("/estudante/update/{id_estudante}")
 async def update_estudante(id_estudante: int):
+    return id_estudante > 0
+
+
+@app.delete("/estudante/delete/{id_estudante}")
+async def delete_estudante(id_estudante: int):
     return id_estudante > 0
