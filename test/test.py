@@ -1,7 +1,6 @@
-from unittest.mock import patch
+from src.main import *
+from random import random
 import pytest
-from pydantic import BaseModel
-
 
 
 @pytest.mark.asyncio
@@ -9,14 +8,12 @@ async def test_root():
     result = await root()
     assert result == {"message": "Hello World"}
 
-
 @pytest.mark.asyncio
-async def test_funcaoteste():
-    with patch("main.random.randint", return_value=12345):
-        result = await funcaoteste()
-
-    assert result == {"teste": True, "num_aleatorio": 12345}
-
+async def test_funcaoteste_com_random():
+    result = await funcaoteste()
+    assert result["teste"] is True
+    assert isinstance(result["num_aleatorio"], int)
+    assert 0 <= result["num_aleatorio"] <= 57000
 
 @pytest.mark.asyncio
 async def test_create_estudante():
